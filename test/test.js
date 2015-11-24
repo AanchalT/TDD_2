@@ -72,6 +72,31 @@ describe("Insert into db", function() {
     expect(val).to.equal(0);
   });
 
+  it( 'should check types', function() {
+    var alltypes={
+      number:11,
+      sum:3,
+      timestamp:new Date().toString()
+    }
+    
+      
+     expect( alltypes.number ).to.be.a( 'Number' );
+     expect( alltypes.sum ).to.be.a( 'Number');
+     expect( alltypes.timestamp ).to.be.a( 'String' );
+    })
+
+
+  it("Should not store the data if all the fields are not present", function(done) {
+    var obj={
+      number:123,
+      sum:6
+    }
+    addToDb(obj,function(err,doc){
+      expect(err).not.equal(null)
+      done();
+    })
+  });
+
 });
 
 });
